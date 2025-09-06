@@ -1,17 +1,109 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Jadwal Kuliah
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-accordion-group>
+    <ion-accordion value="first">
+      <ion-item slot="header" color="light">
+        <ion-label>Senin</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-label>
+            <h2>Praktikum PGPBL</h2>
+            <p>Pemrograman Geospasial Perangkat Bergerak Lanjut</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Teori Metopen</h2>
+            <p>Metodologi Penelitian</p>
+          </ion-label>
+        </ion-item>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="second">
+      <ion-item slot="header" color="light">
+        <ion-label>Selasa</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-label>
+            <h2>Teori Pendidikan Pancasila</h2>
+            <p>Pendidikan Pancasila</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Teori Metopen</h2>
+            <p>Metodologi Penelitian</p>
+          </ion-label>
+        </ion-item>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="third">
+      <ion-item slot="header" color="light">
+        <ion-label>Rabu</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-label>
+            <h2>Praktikum PGPBL</h2>
+            <p>Pemrograman Geospasial Perangkat Bergerak Lanjut</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Teori Metopen</h2>
+            <p>Metodologi Penelitian</p>
+          </ion-label>
+        </ion-item>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="fourth">
+      <ion-item slot="header" color="light">
+        <ion-label>Kamis</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-label>
+            <h2>Praktikum PGPBL</h2>
+            <p>Pemrograman Geospasial Perangkat Bergerak Lanjut</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Teori Metopen</h2>
+            <p>Metodologi Penelitian</p>
+          </ion-label>
+        </ion-item>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="fifth">
+      <ion-item slot="header" color="light">
+        <ion-label>Jumat</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-label>
+            <h2>Praktikum PGPBL</h2>
+            <p>Pemrograman Geospasial Perangkat Bergerak Lanjut</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Teori Metopen</h2>
+            <p>Metodologi Penelitian</p>
+          </ion-label>
+        </ion-item>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
 </ion-content>
+
+
