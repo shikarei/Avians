@@ -1,0 +1,18 @@
+.splash-section {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url('/assets/images/bg4.jpeg');
+}
+
+img {
+  margin-bottom: 30px;
+}
+
+small {
+  color: rgb(255, 221, 98);
+  margin-top: 20px;
+}
+
