@@ -5,6 +5,10 @@ import { CreatepointPage } from './createpoint.page';
 
 const routes: Routes = [
   {
+    path: ':id',
+    component: CreatepointPage
+  },
+  {
     path: '',
     component: CreatepointPage
   }

@@ -1,0 +1,28 @@
+::ng-deep .leaflet-popup-content {
+  min-width: 120px;
+  max-width: 250px;
+  width: auto !important;
+  .popup-hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .popup-delete-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .popup-delete-icon {
+    color: red;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  .popup-edit-icon {
+    color: rgb(0, 21, 255);
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 10px;
+  }
+}
