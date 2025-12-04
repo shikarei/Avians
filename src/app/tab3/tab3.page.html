@@ -1,183 +1,160 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Ionic Components
-    </ion-title>
+    <ion-title>Insights</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
 
-  <!-- Badge -->
-  <ion-text color="secondary">
-    <h2>Badge Components</h2>
-  </ion-text>
-  <ion-list>
-    <ion-item>
-      <ion-badge slot="start">11</ion-badge>
-      <ion-label>Badge in start slot</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-badge slot="end">22</ion-badge>
-      <ion-label>Badge in end slot</ion-label>
-    </ion-item>
-  </ion-list>
+  <!-- FILTER + ACTION BUTTONS (1 Row) -->
+  <ion-row style="
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  ">
 
-  <!-- Breadcrumbs -->
-  <ion-text color="secondary">
-    <h2>Breadcrumbs Components</h2>
-  </ion-text>
-  <ion-breadcrumbs>
-    <ion-breadcrumb href="#home">Home</ion-breadcrumb>
-    <ion-breadcrumb href="#electronics">Electronics</ion-breadcrumb>
-    <ion-breadcrumb href="#cameras">Cameras</ion-breadcrumb>
-    <ion-breadcrumb href="#film">Film</ion-breadcrumb>
-  </ion-breadcrumbs>
+    <!-- Filter Species -->
+    <ion-col size="12" size-md="4">
+      <ion-item>
+        <ion-label>Species</ion-label>
+        <ion-select [(ngModel)]="selectedSpecies" (ionChange)="onFilterChange()" okText="Apply" interface="popover">
+          <ion-select-option value="__all">All species</ion-select-option>
+          <ion-select-option *ngFor="let s of speciesList" [value]="s">
+            {{ s }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
 
-  <!-- Button -->
-  <ion-text color="secondary">
-    <h2>Button Components</h2>
-  </ion-text>
+    <!-- Export + Reset -->
+    <ion-col size="12" size-md="8" style="
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 6px;
+    ">
+      <ion-button size="small" (click)="downloadCSV()">
+        <ion-icon name="download-outline" slot="start"></ion-icon>
+        Export CSV
+      </ion-button>
 
-  <!-- Color Variants -->
-  <ion-button>Default</ion-button>
-  <ion-button color="primary">Primary</ion-button>
-  <ion-button color="secondary">Secondary</ion-button>
-  <ion-button color="tertiary">Tertiary</ion-button>
-  <ion-button color="success">Success</ion-button>
-  <ion-button color="warning">Warning</ion-button>
-  <ion-button color="danger">Danger</ion-button>
-  <ion-button color="light">Light</ion-button>
-  <ion-button color="medium">Medium</ion-button>
-  <ion-button color="dark">Dark</ion-button>
+      <ion-button size="small" color="medium" (click)="resetFilter()">
+        <ion-icon name="refresh-outline" slot="start"></ion-icon>
+        Reset
+      </ion-button>
+    </ion-col>
 
-  <!-- Fill Variants -->
-  <ion-button>Default</ion-button>
-  <ion-button fill="clear">Clear</ion-button>
-  <ion-button fill="outline">Outline</ion-button>
-  <ion-button fill="solid">Solid</ion-button>
+  </ion-row>
 
-  <!-- Icon Only -->
-  <ion-button size="small">
-    <ion-icon slot="icon-only" ios="logo-apple" md="settings-sharp"></ion-icon>
-  </ion-button>
-  <ion-button>
-    <ion-icon slot="icon-only" ios="logo-apple" md="settings-sharp"></ion-icon>
-  </ion-button>
-  <ion-button size="large">
-    <ion-icon slot="icon-only" ios="logo-apple" md="settings-sharp"></ion-icon>
-  </ion-button>
 
-  <!-- Icon Start -->
-  <ion-button size="small">
-    <ion-icon slot="start" name="star"></ion-icon>
-    Left Icon
-  </ion-button>
-  <ion-button>
-    <ion-icon slot="start" name="star"></ion-icon>
-    Left Icon
-  </ion-button>
-  <ion-button size="large">
-    <ion-icon slot="start" name="star"></ion-icon>
-    Left Icon
-  </ion-button>
+  <!-- Summary Cards -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="3">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Total Observations</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <h2 style="margin:0;">{{ totalObservations }}</h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
 
-  <!-- Icon End -->
-  <ion-button size="small">
-    Right Icon
-    <ion-icon slot="end" name="heart"></ion-icon>
-  </ion-button>
-  <ion-button>
-    Right Icon
-    <ion-icon slot="end" name="heart"></ion-icon>
-  </ion-button>
-  <ion-button size="large">
-    Right Icon
-    <ion-icon slot="end" name="heart"></ion-icon>
-  </ion-button>
+      <ion-col size="12" size-md="3">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Total Birds Counted</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <h2 style="margin:0;">{{ totalBirdsCount }}</h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
 
-  <!-- Card -->
-  <ion-text color="secondary">
-    <h2>Card Components</h2>
-  </ion-text>
-  <ion-card>
+      <ion-col size="12" size-md="3">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Unique Species</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <h2 style="margin:0;">{{ uniqueSpecies }}</h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="3">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Diversity Index</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <h2 style="margin:0;">{{ diversityIndex | number:'1.2-2' }}</h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- top + latest row -->
+  <ion-row style="margin-top:6px;">
+    <ion-col size="12" size-md="6">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Top 5 Species</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ol>
+            <li *ngFor="let item of topSpeciesList">{{ item.name }} — {{ item.count }}</li>
+          </ol>
+          <p *ngIf="topSpeciesList.length === 0">No data yet.</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="12" size-md="6">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Latest Observation</ion-card-title>
+        </ion-card-header>
+        <ion-card-content *ngIf="latestObservation">
+          <p><strong>Species:</strong> {{ latestObservation.species }}</p>
+          <p><strong>Date:</strong> {{ latestObservation.date }}</p>
+          <p><strong>Count:</strong> {{ latestObservation.count }}</p>
+          <p><strong>Observer:</strong> {{ latestObservation.observer }}</p>
+          <p><strong>Coordinates:</strong> {{ latestObservation.latitude }}, {{ latestObservation.longitude }}</p>
+          <ion-thumbnail *ngIf="latestObservation.photo" style="width:120px; height:80px; margin-top:8px;">
+            <img [src]="latestObservation.photo" />
+          </ion-thumbnail>
+        </ion-card-content>
+        <ion-card-content *ngIf="!latestObservation">
+          <p>No observations yet.</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <!-- CHARTS -->
+  <ion-card style="margin-top:12px;">
     <ion-card-header>
-      <ion-card-title>Card Title</ion-card-title>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      <ion-card-title>Observations Per Species</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      Here's a small text description for the card content.
-      Nothing more, nothing less.
+    <ion-card-content style="height: 300px;">
+      <canvas id="speciesChart" style="width:100%; height:100%"></canvas>
     </ion-card-content>
   </ion-card>
 
-  <!-- Checkbox -->
-  <ion-text color="secondary">
-    <h2>Checkbox Components</h2>
-  </ion-text>
-  <ion-checkbox>I agree to the terms and conditions</ion-checkbox>
+  <ion-card style="margin-top:12px;">
+    <ion-card-header>
+      <ion-card-title>Observations Over Time</ion-card-title>
+    </ion-card-header>
+    <ion-card-content style="height: 300px;">
+      <canvas id="timelineChart" style="width:100%; height:100%"></canvas>
+    </ion-card-content>
+  </ion-card>
 
-  <!-- Datetime -->
-  <ion-text color="secondary">
-    <h2>Datetime Components</h2>
-  </ion-text>
-  <ion-datetime></ion-datetime>
-
-  <!-- Floating Action Button -->
-  <ion-text color="secondary">
-    <h2>Floating Button Components</h2>
-  </ion-text>
-  <ion-fab slot="fixed" vertical="top" horizontal="end">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button>
-      <ion-icon name="chevron-up-circle"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button>
-        <ion-icon name="document"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button>
-        <ion-icon name="color-palette"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button>
-        <ion-icon name="globe"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
-
-  <!-- Input -->
-  <ion-text color="secondary">
-    <h2>Input Components</h2>
-  </ion-text>
-  <ion-list>
-    <ion-item>
-      <ion-input label="Text input" placeholder="Enter text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input label="Number input" type="number" placeholder="000"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input label="Password input" type="password" value="password"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input label="Email input" type="email" placeholder="email@domain.com"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input label="Telephone input" type="tel" placeholder="888-888-8888"></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <!-- Action Sheet -->
-  <ion-text color="secondary">
-    <h2>Action Sheet Components</h2>
-  </ion-text>
-  <ion-button id="open-action-sheet">Open</ion-button>
-  <ion-action-sheet trigger="open-action-sheet" header="Actions" [buttons]="actionSheetButtons">
-  </ion-action-sheet>
+  <ion-note style="display:block; margin-top:12px;">
+    Data updates in realtime — add, edit, or delete observations to see charts refresh.
+  </ion-note>
 
 </ion-content>

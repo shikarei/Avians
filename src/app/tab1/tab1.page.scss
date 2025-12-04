@@ -1,0 +1,599 @@
+// ========================================
+// VARIABLES
+// ========================================
+$baby-blue: #52c8ff;
+$baby-blue-light: #97d9ff;
+$baby-blue-dark: #1a7ec0;
+$marigold: #ffaa00;
+$marigold-light: #ffca43;
+$marigold-dark: #fe9400;
+$white: #FFFFFF;
+$text-dark: #263f58;
+$text-gray: #424550;
+$medium: #75777d;
+
+// ========================================
+// HEADER STYLING - DOMINASI BABY BLUE
+// ========================================
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg,
+        $baby-blue-dark 0%,
+        $baby-blue 25%,
+        $baby-blue-light 50%,
+        $marigold-light 75%,
+        $marigold 100%);
+    --color: $white;
+
+    ion-title {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      animation: titlePulse 2s ease-in-out infinite;
+    }
+  }
+}
+
+// ========================================
+// CONTENT BACKGROUND - BABY BLUE LAYERS
+// ========================================
+ion-content {
+  --background: linear-gradient(180deg,
+      rgba($baby-blue, 0.3) 0%,
+      rgba($baby-blue-light, 0.4) 25%,
+      rgba($white, 0.95) 50%,
+      rgba($marigold-light, 0.15) 75%,
+      rgba($baby-blue-light, 0.2) 100%);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba($baby-blue, 0.25) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba($marigold-light, 0.2) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba($baby-blue-light, 0.15) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+// ========================================
+// HERO SECTION - SUPER DINAMIS
+// ========================================
+.hero-section {
+  text-align: center;
+  margin-top: 20px;
+  padding: 30px 20px;
+  background: linear-gradient(135deg,
+      $baby-blue 0%,
+      $baby-blue-light 30%,
+      $white 60%,
+      $marigold-light 100%);
+  border-radius: 28px;
+  animation: fadeInDown 0.8s ease-out, heroGlow 3s ease-in-out infinite;
+  box-shadow:
+    0 8px 32px rgba($baby-blue, 0.5),
+    0 16px 56px rgba($baby-blue-dark, 0.3),
+    inset 0 -2px 8px rgba($white, 0.6);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+        transparent 30%,
+        rgba($baby-blue-light, 0.4) 50%,
+        transparent 70%);
+    animation: shimmer 4s linear infinite;
+  }
+
+  img {
+    width: 110px;
+    opacity: 0.95;
+    filter: drop-shadow(0 8px 20px rgba($baby-blue, 0.6));
+    transition: transform 0.4s ease;
+    position: relative;
+    z-index: 1;
+
+    &:hover {
+      transform: scale(1.15) rotate(5deg);
+      filter: drop-shadow(0 12px 28px rgba($baby-blue-dark, 0.8));
+    }
+  }
+}
+
+// ========================================
+// TYPOGRAPHY - GRADIENT ANIMASI
+// ========================================
+h2 {
+  text-align: center;
+  margin-top: 12px;
+  font-weight: 700;
+  background: linear-gradient(135deg,
+      $baby-blue-dark 0%,
+      $baby-blue 25%,
+      $marigold 75%,
+      $marigold-light 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 28px;
+  animation: fadeIn 1s ease-out, gradientShift 4s ease-in-out infinite;
+  background-size: 200% 200%;
+  filter: drop-shadow(0 2px 6px rgba($baby-blue, 0.4));
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: $text-gray;
+  margin-top: -5px;
+  animation: fadeIn 1.2s ease-out;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba($baby-blue-light, 0.25) 20%,
+      rgba($baby-blue-light, 0.25) 80%,
+      transparent);
+  padding: 10px 0;
+  border-radius: 10px;
+}
+
+// ========================================
+// SECTION TITLE - BABY BLUE BAR
+// ========================================
+h3 {
+  font-weight: 600;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: $text-dark;
+  position: relative;
+  padding-left: 22px;
+  font-size: 20px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 30px;
+    background: linear-gradient(180deg,
+        $baby-blue-dark 0%,
+        $baby-blue 30%,
+        $baby-blue-light 60%,
+        $marigold-light 100%);
+    border-radius: 4px;
+    box-shadow:
+      0 2px 12px rgba($baby-blue, 0.6),
+      0 0 24px rgba($baby-blue, 0.4);
+    animation: barPulse 2s ease-in-out infinite;
+  }
+}
+
+// =========================================================
+// ACCORDION - BABY BLUE DOMINAN & SUPER SMOOTH
+// =========================================================
+ion-accordion-group {
+  margin-top: 10px;
+
+  ion-accordion {
+    margin-bottom: 18px;
+    border-radius: 20px;
+    overflow: visible !important;
+    background: $white;
+    border: 3px solid transparent;
+    background-image: linear-gradient($white, $white),
+      linear-gradient(135deg,
+        $baby-blue-dark 0%,
+        $baby-blue 25%,
+        $baby-blue-light 50%,
+        $white 70%,
+        $marigold-light 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    transition: all 0.35s ease;
+    box-shadow:
+      0 6px 24px rgba($baby-blue, 0.4),
+      0 2px 10px rgba($marigold-light, 0.2);
+    animation: cardFloat 4s ease-in-out infinite;
+
+    // ==============================
+    // HEADER - BABY BLUE GRADIENT
+    // ==============================
+    ion-item[slot="header"] {
+      --background: linear-gradient(135deg,
+          rgba($baby-blue, 0.7),
+          rgba($baby-blue-light, 0.6),
+          rgba($white, 0.9),
+          rgba($marigold-light, 0.5));
+
+      padding: 0 !important;
+
+      &::part(native) {
+        padding: 0 !important;
+        margin: 0 !important;
+        min-height: 66px;
+        display: flex;
+        align-items: center;
+      }
+
+      ion-label {
+        margin-left: 22px;
+        font-weight: 700;
+        font-size: 17px;
+        color: $text-dark;
+        text-shadow: 0 1px 3px rgba($white, 0.9);
+      }
+    }
+
+    // ==============================
+    // CONTENT - GRADIENT BABY BLUE
+    // ==============================
+    div[slot="content"] {
+      background: linear-gradient(180deg,
+          rgba($baby-blue, 0.3),
+          rgba($baby-blue-light, 0.2) 30%,
+          $white 60%,
+          rgba($marigold-light, 0.12) 100%);
+      border-top: 4px solid;
+      border-image: linear-gradient(90deg,
+          $baby-blue-dark,
+          $baby-blue,
+          $baby-blue-light,
+          $marigold-light,
+          $marigold) 1;
+      padding: 20px;
+      animation: slideDownSmooth 0.35s ease-out;
+
+      p {
+        font-size: 14px;
+        color: $text-dark;
+        background: linear-gradient(135deg,
+            rgba($white, 0.95),
+            rgba($baby-blue-light, 0.15));
+        padding: 14px 16px;
+        border-radius: 14px;
+        margin-bottom: 14px;
+        border-left: 5px solid $baby-blue;
+        box-shadow: 0 3px 12px rgba($baby-blue, 0.2);
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateX(4px);
+          box-shadow: 0 5px 18px rgba($baby-blue, 0.35);
+        }
+      }
+
+      img {
+        width: 100%;
+        border-radius: 16px;
+        margin-bottom: 14px;
+        object-fit: cover;
+        box-shadow:
+          0 8px 28px rgba($baby-blue, 0.3),
+          0 4px 14px rgba($marigold, 0.2);
+        border: 4px solid $white;
+        transition: all 0.4s ease;
+
+        &:hover {
+          transform: scale(1.03);
+          box-shadow:
+            0 14px 40px rgba($baby-blue, 0.45),
+            0 7px 20px rgba($marigold, 0.3);
+        }
+      }
+    }
+
+    // ==============================
+    // EXPANDED - RAINBOW EFFECT
+    // ==============================
+    &.accordion-expanded {
+      box-shadow:
+        0 14px 48px rgba($baby-blue, 0.6),
+        0 8px 24px rgba($marigold, 0.35),
+        inset 0 2px 6px rgba($white, 0.8);
+      transform: translateY(-3px);
+
+      ion-item[slot="header"] {
+        --background: linear-gradient(135deg,
+            $baby-blue-dark,
+            $baby-blue,
+            $baby-blue-light,
+            $white,
+            $marigold-light,
+            $marigold);
+
+        ion-label {
+          color: $baby-blue-dark !important;
+          text-shadow: 0 2px 10px rgba($white, 0.7);
+        }
+
+        &::part(native) {
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+      }
+    }
+  }
+}
+
+// =========================================================
+// ANIMATION - SMOOTH VERSION
+// =========================================================
+@keyframes slideDownSmooth {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* BUTTON CUSTOMIZED FULL - SUPPORT IONIC SHADOW DOM */
+
+/* ===== HOST CLASS (animasi & efek luar) ===== */
+.start-btn {
+  margin-top: 30px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  display: block;
+
+  /* SHINE SWIPE */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.5) 50%,
+        transparent 100%);
+    transition: left 0.6s ease;
+    z-index: 3;
+  }
+
+  /* BUBBLE GLOW */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba($white, 0.4);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+    z-index: 2;
+  }
+
+  &:hover {
+    transform: translateY(-5px) scale(1.04);
+
+    &::before {
+      left: 100%;
+    }
+
+    &::after {
+      width: 300px;
+      height: 300px;
+    }
+  }
+
+  &:active {
+    transform: translateY(-2px) scale(1.02);
+  }
+}
+
+/* ===== APPLY GRADIENT BUTTON INTO IONIC SHADOW PART ===== */
+ion-button.start-btn::part(native) {
+  /* GRADIENT BACKGROUND */
+  background: linear-gradient(135deg,
+      $baby-blue-dark 0%,
+      $baby-blue 20%,
+      $baby-blue-light 40%,
+      $white 50%,
+      $marigold-light 70%,
+      $marigold 100%) !important;
+
+  /* GRADIENT ON HOVER (FOR SUPPORTED BROWSERS) */
+  transition: all 0.4s ease !important;
+
+  /* RADIUS */
+  border-radius: 22px !important;
+
+  /* SHADOW */
+  box-shadow: 0 10px 32px rgba($baby-blue, 0.65),
+    0 5px 16px rgba($marigold, 0.35) !important;
+
+  /* BUTTON SIZE */
+  height: 58px !important;
+
+  /* TEXT STYLE */
+  font-weight: 700 !important;
+  font-size: 17px !important;
+  letter-spacing: 1px;
+  color: $baby-blue-dark !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+
+  /* REMOVE DEFAULT BORDER UNDER IONIC */
+  border: none !important;
+
+  /* POSITION FOR EFFECTS */
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* HOVER EFFECT UNTUK SHADOW BERTAMBAH */
+ion-button.start-btn:hover::part(native) {
+  box-shadow: 0 16px 48px rgba($baby-blue, 0.8),
+    0 10px 24px rgba($marigold, 0.5) !important;
+}
+
+// ========================================
+// ANIMATIONS - ALL EFFECTS
+// ========================================
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes heroGlow {
+
+  0%,
+  100% {
+    box-shadow:
+      0 8px 32px rgba($baby-blue, 0.5),
+      0 16px 56px rgba($baby-blue-dark, 0.3),
+      inset 0 -2px 8px rgba($white, 0.6);
+  }
+
+  50% {
+    box-shadow:
+      0 14px 42px rgba($baby-blue, 0.7),
+      0 22px 68px rgba($baby-blue-dark, 0.45),
+      inset 0 -2px 8px rgba($white, 0.8);
+  }
+}
+
+@keyframes gradientShift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes titlePulse {
+
+  0%,
+  100% {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  50% {
+    text-shadow: 0 4px 18px rgba($baby-blue, 0.7);
+  }
+}
+
+@keyframes cardFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes barPulse {
+
+  0%,
+  100% {
+    box-shadow:
+      0 2px 12px rgba($baby-blue, 0.6),
+      0 0 24px rgba($baby-blue, 0.4);
+  }
+
+  50% {
+    box-shadow:
+      0 4px 22px rgba($baby-blue, 0.9),
+      0 0 36px rgba($baby-blue, 0.6);
+  }
+}
+
+// ========================================
+// RESPONSIVE ADJUSTMENTS
+// ========================================
+@media (min-width: 768px) {
+  h2 {
+    font-size: 34px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .hero-section img {
+    width: 140px;
+  }
+
+  ion-accordion {
+    ion-item[slot="header"] {
+      --min-height: 74px;
+
+      ion-label {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+// ========================================
+// EXTRA: Floating animation untuk hero bird
+// ========================================
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.hero-section img {
+  animation: float 3s ease-in-out infinite;
+}

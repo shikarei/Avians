@@ -8,15 +8,105 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div id="mapcreate" style="height: 400px;"></div>
 
-  <ion-item>
-    <ion-label position="floating">Name</ion-label>
-    <ion-input [(ngModel)]="name"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Coordinates</ion-label>
-    <ion-input [(ngModel)]="coordinates"></ion-input>
-  </ion-item>
-  <ion-button expand="full" (click)="save()">{{ buttonText }}</ion-button>
+  <!-- ===============================
+      BASEMAP SWITCH FAB (NEW)
+  =============================== -->
+  <ion-fab slot="fixed" vertical="top" horizontal="end" style="margin: 12px;">
+    <ion-fab-button size="small">
+      <ion-icon name="layers-outline"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="bottom">
+      <ion-fab-button size="small" (click)="setBasemap('osm')">
+        <ion-icon name="map-outline"></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-button size="small" (click)="setBasemap('esri')">
+        <ion-icon name="image-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+
+
+  <!-- ===============================
+        MAP AREA
+  =============================== -->
+  <div id="mapcreate" style="height: 350px; margin-bottom: 10px;"></div>
+
+
+  <!-- ===============================
+        FORM AREA
+  =============================== -->
+  <ion-list>
+
+    <!-- Species -->
+    <ion-item>
+      <ion-label position="stacked">Species *</ion-label>
+      <ion-input [(ngModel)]="species" placeholder="Enter bird species"></ion-input>
+    </ion-item>
+
+    <!-- Count -->
+    <ion-item>
+      <ion-label position="stacked">Count *</ion-label>
+      <ion-input type="number" [(ngModel)]="count" placeholder="Number of individuals observed"></ion-input>
+    </ion-item>
+
+    <!-- Date -->
+    <ion-item>
+      <ion-label position="stacked">Date *</ion-label>
+      <ion-input type="date" [(ngModel)]="date"></ion-input>
+    </ion-item>
+
+    <!-- Photo Upload -->
+    <ion-item>
+      <ion-label position="stacked">Photo (Optional)</ion-label>
+
+      <input type="file" accept="image/*" (change)="onFileSelected($event)" style="margin-top: 10px;" />
+
+      <div *ngIf="photoPreview" style="margin-top: 10px;">
+        <img [src]="photoPreview" style="width: 120px; border-radius: 6px;">
+      </div>
+    </ion-item>
+
+    <!-- Audio Upload -->
+    <ion-item>
+      <ion-label position="stacked">Audio (Optional)</ion-label>
+
+      <input type="file" accept="audio/*" (change)="onAudioSelected($event)" style="margin-top: 10px;" />
+
+      <div *ngIf="audioName" style="margin-top: 10px; font-size: 14px;">
+        Selected audio: <strong>{{ audioName }}</strong>
+      </div>
+
+      <audio *ngIf="audioPreview" [src]="audioPreview" controls style="margin-top: 10px; width: 100%;"></audio>
+    </ion-item>
+
+    <!-- Observer -->
+    <ion-item>
+      <ion-label position="stacked">Observer (Optional)</ion-label>
+      <ion-input [(ngModel)]="observer" placeholder="Your name"></ion-input>
+    </ion-item>
+
+    <!-- Latitude -->
+    <ion-item>
+      <ion-label position="stacked">Latitude</ion-label>
+      <ion-input [value]="latitude" readonly></ion-input>
+    </ion-item>
+
+    <!-- Longitude -->
+    <ion-item>
+      <ion-label position="stacked">Longitude</ion-label>
+      <ion-input [value]="longitude" readonly></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+
+  <!-- SAVE BUTTON -->
+  <ion-button expand="block" (click)="save()" class="save-btn">
+    {{ buttonText }}
+  </ion-button>
+
 </ion-content>

@@ -1,109 +1,55 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Jadwal Kuliah
-    </ion-title>
+    <ion-title style="font-weight: 700;">Observations</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-accordion-group>
-    <ion-accordion value="first">
-      <ion-item slot="header" color="light">
-        <ion-label>Senin</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-item>
-          <ion-label>
-            <h2>Praktikum PGPBL</h2>
-            <p>Pemrograman Geospasial Perangkat Bergerak Lanjut</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h2>Teori Metopen</h2>
-            <p>Metodologi Penelitian</p>
-          </ion-label>
-        </ion-item>
-      </div>
-    </ion-accordion>
-    <ion-accordion value="second">
-      <ion-item slot="header" color="light">
-        <ion-label>Selasa</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-item>
-          <ion-label>
-            <h2>Teori Pendidikan Pancasila</h2>
-            <p>Pendidikan Pancasila</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h2>Teori Metopen</h2>
-            <p>Metodologi Penelitian</p>
-          </ion-label>
-        </ion-item>
-      </div>
-    </ion-accordion>
-    <ion-accordion value="third">
-      <ion-item slot="header" color="light">
-        <ion-label>Rabu</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-item>
-          <ion-label>
-            <h2>Praktikum PGPBL</h2>
-            <p>Pemrograman Geospasial Perangkat Bergerak Lanjut</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h2>Teori Metopen</h2>
-            <p>Metodologi Penelitian</p>
-          </ion-label>
-        </ion-item>
-      </div>
-    </ion-accordion>
-    <ion-accordion value="fourth">
-      <ion-item slot="header" color="light">
-        <ion-label>Kamis</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-item>
-          <ion-label>
-            <h2>Praktikum PGPBL</h2>
-            <p>Pemrograman Geospasial Perangkat Bergerak Lanjut</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h2>Teori Metopen</h2>
-            <p>Metodologi Penelitian</p>
-          </ion-label>
-        </ion-item>
-      </div>
-    </ion-accordion>
-    <ion-accordion value="fifth">
-      <ion-item slot="header" color="light">
-        <ion-label>Jumat</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-item>
-          <ion-label>
-            <h2>Praktikum PGPBL</h2>
-            <p>Pemrograman Geospasial Perangkat Bergerak Lanjut</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h2>Teori Metopen</h2>
-            <p>Metodologi Penelitian</p>
-          </ion-label>
-        </ion-item>
-      </div>
-    </ion-accordion>
-  </ion-accordion-group>
+<ion-content class="ion-padding">
+
+  <ion-list *ngIf="observations.length > 0">
+
+    <ion-card *ngFor="let obs of observations" class="obs-card">
+
+      <ion-card-content>
+
+        <div style="display:flex; justify-content: space-between; align-items: start;">
+          <div style="flex:1;">
+
+            <h2 style="font-weight:700; margin-bottom:6px;">
+              {{ obs.species }}
+            </h2>
+
+            <p><strong>Date:</strong> {{ obs.date }}</p>
+            <p><strong>Count:</strong> {{ obs.count }}</p>
+            <p><strong>Observer:</strong> {{ obs.observer }}</p>
+
+            <p>
+              <strong>Lat:</strong> {{ obs.latitude }} |
+              <strong>Lng:</strong> {{ obs.longitude }}
+            </p>
+
+          </div>
+
+          <!-- BUTTONS -->
+          <div style="display:flex; flex-direction:column; gap:6px; margin-left:10px;">
+            <ion-button fill="clear" (click)="edit(obs.id)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+
+            <ion-button fill="clear" color="danger" (click)="delete(obs.id)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </ion-list>
+
+  <ion-item *ngIf="observations.length === 0">
+    <ion-label>No observations found.</ion-label>
+  </ion-item>
+
 </ion-content>
-
-

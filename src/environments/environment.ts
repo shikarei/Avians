@@ -7,12 +7,13 @@ export const environment = {
 
   // Your web app's Firebase configuration
   firebaseConfig : {
-    apiKey: "AIzaSyBlhCBpMsRPlCUIAeq7W0L-HDLvuUhCdaY",
-    authDomain: "pgpbl-ionic-4c96c.firebaseapp.com",
-    projectId: "pgpbl-ionic-4c96c",
-    storageBucket: "pgpbl-ionic-4c96c.firebasestorage.app",
-    messagingSenderId: "755406193759",
-    appId: "1:755406193759:web:280085c49a7d4113c307ea"
+    apiKey: "AIzaSyAlkUYHGnkyAsQ7FY9PCdlur3VwewvXeYU",
+    authDomain: "avians-firebase.firebaseapp.com",
+    databaseURL: "https://avians-firebase-default-rtdb.firebaseio.com",
+    projectId: "avians-firebase",
+    storageBucket: "avians-firebase.firebasestorage.app",
+    messagingSenderId: "324109071210",
+    appId: "1:324109071210:web:729303a8ed192cd77c2b13"
   }
 };
 

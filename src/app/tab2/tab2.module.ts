@@ -13,8 +13,10 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab2PageRoutingModule
+    Tab2PageRoutingModule,
+    Tab2Page  // standalone masuk sini
   ],
-  declarations: [Tab2Page]
+  declarations: [] // <--- kosong
 })
-export class Tab2PageModule {}
+export class Tab2PageModule { }
+

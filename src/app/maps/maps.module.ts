@@ -13,8 +13,8 @@ import { MapsPage } from './maps.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    MapsPageRoutingModule
-  ],
-  declarations: [MapsPage]
+    MapsPageRoutingModule,
+    MapsPage
+  ]
 })
-export class MapsPageModule {}
+export class MapsPageModule { }

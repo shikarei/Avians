@@ -1,0 +1,812 @@
+// ========================================
+// VARIABLES
+// ========================================
+$baby-blue: #52c8ff;
+$baby-blue-light: #97d9ff;
+$baby-blue-dark: #1a7ec0;
+$marigold: #ffaa00;
+$marigold-light: #ffca43;
+$marigold-dark: #fe9400;
+$white: #FFFFFF;
+$text-dark: #263f58;
+$text-gray: #424550;
+$medium: #75777d;
+$success: #2dd36f;
+
+// ========================================
+// HEADER STYLING - CREATE POINT
+// ========================================
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg,
+        $baby-blue-dark 0%,
+        $baby-blue 25%,
+        $baby-blue-light 50%,
+        $marigold-light 75%,
+        $marigold 100%);
+    --color: $white;
+
+    ion-title {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+      animation: titlePulse 2.5s ease-in-out infinite;
+    }
+
+    ion-back-button {
+      --color: $white;
+      --icon-font-size: 24px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: scale(1.15) translateX(-3px);
+        filter: drop-shadow(0 2px 8px rgba($white, 0.6));
+      }
+    }
+  }
+}
+
+// ========================================
+// CONTENT BACKGROUND - DYNAMIC LAYERS
+// ========================================
+ion-content {
+  --background: linear-gradient(180deg,
+      rgba($baby-blue, 0.25) 0%,
+      rgba($baby-blue-light, 0.35) 20%,
+      rgba($white, 0.95) 50%,
+      rgba($marigold-light, 0.12) 80%,
+      rgba($baby-blue-light, 0.18) 100%);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba($baby-blue, 0.22) 0%, transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba($marigold-light, 0.18) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba($baby-blue-light, 0.12) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+// ========================================
+// MAIN CONTAINER - RESPONSIVE WRAPPER
+// ========================================
+.content-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 16px;
+  width: 100%;
+}
+
+// ========================================
+// MAP AREA - STYLED WITH GRADIENT BORDER
+// ========================================
+#mapcreate {
+  width: 100%;
+  max-width: 100%;
+  height: 350px;
+  margin: 16px 0;
+  border-radius: 20px;
+  border: 4px solid transparent;
+  background-image: linear-gradient($white, $white),
+    linear-gradient(135deg,
+      $baby-blue-dark 0%,
+      $baby-blue 25%,
+      $baby-blue-light 50%,
+      $marigold-light 75%,
+      $marigold 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow:
+    0 10px 32px rgba($baby-blue, 0.4),
+    0 5px 16px rgba($marigold, 0.25);
+  overflow: hidden;
+  animation: mapSlideIn 0.8s ease-out;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+        transparent 30%,
+        rgba($baby-blue-light, 0.15) 50%,
+        transparent 70%);
+    animation: shimmer 6s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+// Map container wrapper
+.map-container {
+  padding: 0 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+// ========================================
+// FORM LIST STYLING
+// ========================================
+ion-list {
+  background: transparent;
+  padding: 0 16px;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+// ========================================
+// FORM ITEMS - COLORFUL & INTERACTIVE
+// ========================================
+ion-item {
+  --background: linear-gradient(135deg,
+      rgba($baby-blue-light, 0.15),
+      rgba($white, 0.95),
+      rgba($marigold-light, 0.1));
+  --border-radius: 16px;
+  --padding-start: 18px;
+  --padding-end: 18px;
+  --inner-padding-end: 0;
+
+  margin-bottom: 16px;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  background-image: linear-gradient(rgba($white, 0.95), rgba($white, 0.95)),
+    linear-gradient(135deg,
+      $baby-blue 0%,
+      $baby-blue-light 50%,
+      $marigold-light 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 4px 16px rgba($baby-blue, 0.25);
+  transition: all 0.4s ease;
+  animation: itemSlideIn 0.6s ease-out;
+  position: relative;
+  overflow: visible;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(180deg,
+        $baby-blue-dark 0%,
+        $baby-blue 50%,
+        $baby-blue-light 100%);
+    border-radius: 16px 0 0 16px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 8px 24px rgba($baby-blue, 0.4),
+      0 4px 12px rgba($marigold, 0.2);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &:focus-within {
+    border-color: transparent;
+    box-shadow:
+      0 8px 28px rgba($baby-blue, 0.5),
+      0 4px 14px rgba($marigold, 0.3);
+    transform: translateY(-2px);
+
+    &::before {
+      opacity: 1;
+      background: linear-gradient(180deg,
+          $marigold-dark 0%,
+          $marigold 50%,
+          $marigold-light 100%);
+    }
+  }
+
+  // Staggered animation
+  &:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  &:nth-child(2) {
+    animation-delay: 0.05s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.1s;
+  }
+
+  &:nth-child(4) {
+    animation-delay: 0.15s;
+  }
+
+  &:nth-child(5) {
+    animation-delay: 0.2s;
+  }
+
+  &:nth-child(6) {
+    animation-delay: 0.25s;
+  }
+
+  &:nth-child(7) {
+    animation-delay: 0.3s;
+  }
+
+  &:nth-child(8) {
+    animation-delay: 0.35s;
+  }
+}
+
+// ========================================
+// LABELS - GRADIENT TEXT
+// ========================================
+ion-label {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg,
+      $baby-blue-dark 0%,
+      $baby-blue 50%,
+      $marigold 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.3px;
+
+  &[position="stacked"] {
+    margin-bottom: 10px;
+  }
+}
+
+// ========================================
+// INPUTS - STYLED
+// ========================================
+ion-input {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+
+  font-size: 15px;
+  color: $text-dark;
+  background: rgba($white, 0.7);
+  border-radius: 10px;
+  margin-top: 6px;
+  transition: all 0.3s ease;
+
+  &:focus {
+    background: rgba($baby-blue-light, 0.1);
+  }
+}
+
+// Readonly inputs
+ion-input[readonly] {
+  --background: linear-gradient(135deg,
+      rgba($baby-blue-light, 0.15),
+      rgba($marigold-light, 0.1));
+  opacity: 0.8;
+  font-weight: 500;
+  color: $text-gray;
+}
+
+// ========================================
+// FILE INPUTS - CUSTOM STYLING
+// ========================================
+input[type="file"] {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 10px;
+  background: linear-gradient(135deg,
+      rgba($baby-blue-light, 0.15),
+      rgba($white, 0.95));
+  border: 2px dashed $baby-blue;
+  border-radius: 12px;
+  color: $text-dark;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+
+  &::-webkit-file-upload-button {
+    padding: 8px 16px;
+    background: linear-gradient(135deg,
+        $baby-blue 0%,
+        $baby-blue-light 100%);
+    color: $white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 12px;
+    box-shadow: 0 3px 10px rgba($baby-blue, 0.4);
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: linear-gradient(135deg,
+          $baby-blue-dark 0%,
+          $baby-blue 100%);
+      box-shadow: 0 5px 16px rgba($baby-blue, 0.6);
+      transform: scale(1.05);
+    }
+  }
+
+  &:hover {
+    border-color: $baby-blue-dark;
+    background: linear-gradient(135deg,
+        rgba($baby-blue-light, 0.25),
+        rgba($white, 0.95));
+    box-shadow: 0 4px 12px rgba($baby-blue, 0.3);
+  }
+}
+
+// Audio file input (different color)
+ion-item:has(input[type="file"][accept="audio/*"]) input[type="file"] {
+  border-color: $marigold;
+
+  &::-webkit-file-upload-button {
+    background: linear-gradient(135deg,
+        $marigold 0%,
+        $marigold-light 100%);
+    box-shadow: 0 3px 10px rgba($marigold, 0.4);
+
+    &:hover {
+      background: linear-gradient(135deg,
+          $marigold-dark 0%,
+          $marigold 100%);
+      box-shadow: 0 5px 16px rgba($marigold, 0.6);
+    }
+  }
+
+  &:hover {
+    border-color: $marigold-dark;
+    background: linear-gradient(135deg,
+        rgba($marigold-light, 0.15),
+        rgba($white, 0.95));
+  }
+}
+
+// ========================================
+// PREVIEW ELEMENTS
+// ========================================
+
+// Photo preview
+ion-item img {
+  width: 140px;
+  height: auto;
+  border-radius: 12px;
+  margin-top: 12px;
+  border: 3px solid $white;
+  box-shadow:
+    0 6px 20px rgba($baby-blue, 0.35),
+    0 3px 10px rgba($marigold, 0.2);
+  transition: all 0.4s ease;
+  animation: imageZoomIn 0.5s ease-out;
+
+  &:hover {
+    transform: scale(1.08);
+    box-shadow:
+      0 10px 32px rgba($baby-blue, 0.5),
+      0 5px 16px rgba($marigold, 0.35);
+  }
+}
+
+// Audio name text
+div[style*="Selected audio"] {
+  padding: 10px 14px;
+  background: linear-gradient(135deg,
+      rgba($marigold-light, 0.15),
+      rgba($white, 0.95));
+  border-radius: 10px;
+  border-left: 4px solid $marigold;
+  box-shadow: 0 3px 10px rgba($marigold, 0.2);
+  animation: fadeIn 0.5s ease-out;
+
+  strong {
+    color: $marigold-dark;
+    font-weight: 700;
+  }
+}
+
+// Audio player
+audio {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 14px;
+  outline: none;
+  background: linear-gradient(135deg,
+      rgba($marigold-light, 0.2),
+      rgba($baby-blue-light, 0.15));
+  padding: 6px;
+  box-shadow: 0 4px 16px rgba($marigold, 0.3);
+  animation: fadeIn 0.5s ease-out;
+
+  &::-webkit-media-controls-panel {
+    background: linear-gradient(135deg,
+        rgba($marigold-light, 0.25),
+        rgba($white, 0.95));
+    border-radius: 10px;
+  }
+
+  &::-webkit-media-controls-play-button,
+  &::-webkit-media-controls-mute-button {
+    filter: hue-rotate(-15deg) saturate(1.3);
+  }
+}
+
+// ========================================
+// SAVE BUTTON - GRADIENT & INTERACTIVE
+// ========================================
+ion-button {
+  position: relative;
+  z-index: 10;
+  margin: 24px 16px;
+  max-width: 900px;
+  width: calc(100% - 32px);
+  display: block;
+  overflow: hidden; // penting untuk before/after
+  border-radius: 20px;
+
+  // RESET bawaan ionic agar tidak bentrok
+  --background: transparent;
+  --background-hover: transparent;
+  --border-radius: 20px;
+  --padding-start: 0;
+  --padding-end: 0;
+
+  // ====== PSEUDO ELEMENT DESIGN (host layer) ======
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.5) 50%,
+        transparent 100%);
+    z-index: 2;
+    transition: left .6s ease;
+  }
+
+  &::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    color: rgb(255, 255, 255);
+    font-size: 32px;
+    z-index: 3;
+    transition: transform .4s ease, opacity .4s ease;
+    opacity: 0;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
+
+  &:active::after {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 1;
+  }
+
+  // ====== NATIVE PART BACKGROUND ======
+  &::part(native) {
+    background: linear-gradient(135deg,
+        $baby-blue-dark 0%,
+        $baby-blue 20%,
+        $baby-blue-light 40%,
+        $white 60%,
+        $marigold-light 70%,
+        $marigold 100%);
+    border-radius: 20px;
+    box-shadow: 0 8px 28px rgba($baby-blue, 0.6),
+      0 4px 14px rgba($marigold, 0.4);
+    padding: 16px;
+    color: rgb(38, 92, 178);
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 1px;
+    text-transform: none;
+  }
+
+  // ====== HOVER NATIVE BACKGROUND ======
+  &:hover::part(native) {
+    background: linear-gradient(135deg,
+        $baby-blue 0%,
+        $baby-blue-light 30%,
+        $white 50%,
+        $marigold 80%,
+        $marigold-dark 100%);
+    color: $baby-blue;
+  }
+}
+
+.save-btn {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+// ========================================
+// ANIMATIONS
+// ========================================
+@keyframes titlePulse {
+
+  0%,
+  100% {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  }
+
+  50% {
+    text-shadow: 0 4px 20px rgba($baby-blue, 0.7);
+  }
+}
+
+@keyframes mapSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes itemSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes buttonSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes imageZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// ========================================
+// RESPONSIVE ADJUSTMENTS
+// ========================================
+@media (min-width: 1200px) {
+  #mapcreate {
+    height: 450px;
+  }
+
+  ion-list,
+  ion-button {
+    max-width: 1000px;
+  }
+}
+
+@media (min-width: 768px) {
+  #mapcreate {
+    height: 400px;
+  }
+
+  ion-list,
+  ion-button {
+    max-width: 900px;
+  }
+
+  ion-item {
+    margin-bottom: 20px;
+
+    img {
+      width: 180px;
+    }
+  }
+
+  ion-button {
+    height: 58px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 767px) {
+  #mapcreate {
+    height: 320px;
+  }
+
+  ion-list {
+    padding: 0 12px;
+  }
+
+  ion-button {
+    margin: 20px 12px;
+    width: calc(100% - 24px);
+  }
+}
+
+@media (max-width: 576px) {
+  #mapcreate {
+    height: 280px;
+    border-width: 3px;
+  }
+
+  ion-item {
+    --padding-start: 14px;
+    --padding-end: 14px;
+    margin-bottom: 12px;
+
+    img {
+      width: 100px;
+    }
+  }
+
+  ion-button {
+    margin: 16px 12px;
+    height: 52px;
+    font-size: 16px;
+    width: calc(100% - 24px);
+  }
+
+  ion-label {
+    font-size: 13px;
+  }
+
+  input[type="file"] {
+    font-size: 13px;
+    padding: 10px 12px;
+
+    &::-webkit-file-upload-button {
+      padding: 6px 12px;
+      font-size: 13px;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  #mapcreate {
+    height: 250px;
+  }
+
+  ion-item {
+    --padding-start: 12px;
+    --padding-end: 12px;
+    margin-bottom: 10px;
+  }
+
+  ion-button {
+    height: 48px;
+    font-size: 15px;
+  }
+}
+
+// ========================================
+// REQUIRED FIELD INDICATOR
+// ========================================
+ion-label:has(+ ion-input[required])::after,
+ion-item:has(ion-label:contains("*")) ion-label::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: $marigold;
+  border-radius: 50%;
+  margin-left: 4px;
+  box-shadow: 0 0 8px rgba($marigold, 0.6);
+  animation: requiredPulse 2s ease-in-out infinite;
+}
+
+@keyframes requiredPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+// ========================================
+// LOADING STATE (OPTIONAL)
+// ========================================
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($baby-blue-light, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-out;
+
+  &::after {
+    content: '';
+    width: 60px;
+    height: 60px;
+    border: 6px solid rgba($white, 0.3);
+    border-top-color: $baby-blue-dark;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+#mapcreate {
+  z-index: 0 !important;
+  overflow: visible !important;
+}
+
+ion-button {
+  position: relative !important;
+  z-index: 9999 !important;
+}

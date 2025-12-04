@@ -1,0 +1,616 @@
+// ========================================
+// VARIABLES
+// ========================================
+$baby-blue: #52c8ff;
+$baby-blue-light: #97d9ff;
+$baby-blue-dark: #1a7ec0;
+$marigold: #ffaa00;
+$marigold-light: #ffca43;
+$marigold-dark: #fe9400;
+$white: #FFFFFF;
+$text-dark: #263f58;
+$text-gray: #424550;
+$medium: #75777d;
+
+
+// ========================================
+// HEADER STYLING - INSIGHTS
+// ========================================
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg,
+        $baby-blue-dark 0%,
+        $baby-blue 25%,
+        $baby-blue-light 50%,
+        $marigold-light 75%,
+        $marigold 100%);
+    --color: $white;
+
+    ion-title {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+      animation: titlePulse 2.5s ease-in-out infinite;
+    }
+  }
+}
+
+// ========================================
+// CONTENT BACKGROUND - DYNAMIC LAYERS
+// ========================================
+ion-content {
+  --background: linear-gradient(180deg,
+      rgba($baby-blue, 0.25) 0%,
+      rgba($baby-blue-light, 0.35) 20%,
+      rgba($white, 0.95) 50%,
+      rgba($marigold-light, 0.12) 80%,
+      rgba($baby-blue-light, 0.18) 100%);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba($baby-blue, 0.22) 0%, transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba($marigold-light, 0.18) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba($baby-blue-light, 0.12) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+// ========================================
+// FILTER SECTION - INTERACTIVE
+// ========================================
+ion-row {
+  position: relative;
+  z-index: 1;
+}
+
+// Filter Item
+ion-item {
+  --background: linear-gradient(135deg,
+      rgba($baby-blue-light, 0.2),
+      rgba($white, 0.95),
+      rgba($marigold-light, 0.15));
+  --border-radius: 16px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  background-image: linear-gradient(rgba($white, 0.95), rgba($white, 0.95)),
+    linear-gradient(90deg, $baby-blue, $baby-blue-light, $marigold-light);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 4px 16px rgba($baby-blue, 0.25);
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($baby-blue, 0.35);
+  }
+
+  ion-label {
+    color: $baby-blue-dark;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  ion-select {
+    color: $text-dark;
+    font-weight: 500;
+  }
+}
+
+// Action Buttons
+ion-button {
+  --border-radius: 16px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --box-shadow: 0 4px 16px rgba($baby-blue, 0.35);
+  height: 42px;
+  font-weight: 600;
+  text-transform: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 100%);
+    transition: left 0.5s ease;
+  }
+
+  &:hover {
+    transform: translateY(-3px) scale(1.03);
+    --box-shadow: 0 8px 24px rgba($baby-blue, 0.5);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px) scale(1.01);
+  }
+}
+
+// Download Button - Baby Blue Theme
+ion-button:not([color]) {
+  --background: linear-gradient(135deg,
+      $baby-blue-dark 0%,
+      $baby-blue 40%,
+      $baby-blue-light 100%);
+  --background-hover: linear-gradient(135deg,
+      $baby-blue 0%,
+      $baby-blue-light 100%);
+  --color: $white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+// Reset Button - Medium Gray with Marigold Accent
+ion-button[color="medium"] {
+  --background: linear-gradient(135deg,
+      $medium 0%,
+      lighten($medium, 10%) 50%,
+      $marigold-light 100%);
+  --background-hover: linear-gradient(135deg,
+      darken($medium, 5%) 0%,
+      $medium 100%);
+  --box-shadow: 0 4px 16px rgba($medium, 0.3);
+
+  &:hover {
+    --box-shadow: 0 8px 24px rgba($medium, 0.4);
+  }
+}
+
+// ========================================
+// SUMMARY CARDS - COLORFUL STATS
+// ========================================
+ion-card {
+  border-radius: 20px;
+  margin-bottom: 16px;
+  border: 3px solid transparent;
+  background-image: linear-gradient($white, $white),
+    linear-gradient(135deg,
+      $baby-blue-dark 0%,
+      $baby-blue 25%,
+      $baby-blue-light 50%,
+      $white 70%,
+      $marigold-light 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 6px 20px rgba($baby-blue, 0.3);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  animation: cardSlideIn 0.6s ease-out;
+
+  // Shimmer effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+        transparent 30%,
+        rgba($baby-blue-light, 0.15) 50%,
+        transparent 70%);
+    animation: shimmer 6s linear infinite;
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 32px rgba($baby-blue, 0.45),
+      0 6px 16px rgba($marigold, 0.25);
+  }
+
+  // Staggered animation
+  &:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  &:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+
+  &:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+}
+
+// Card Header
+ion-card-header {
+  padding: 16px 20px 8px;
+  background: linear-gradient(135deg,
+      rgba($baby-blue-light, 0.15),
+      rgba($white, 0.8),
+      rgba($marigold-light, 0.1));
+  border-bottom: 2px solid;
+  border-image: linear-gradient(90deg,
+      $baby-blue,
+      $baby-blue-light,
+      $marigold-light) 1;
+
+  ion-card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: $baby-blue-dark;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+}
+
+// Card Content
+ion-card-content {
+  padding: 16px 20px;
+  position: relative;
+  z-index: 1;
+
+  h2 {
+    font-size: 36px;
+    font-weight: 700;
+    background: linear-gradient(135deg,
+        $baby-blue-dark 0%,
+        $baby-blue 40%,
+        $marigold 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease-in-out infinite;
+    filter: drop-shadow(0 2px 6px rgba($baby-blue, 0.3));
+  }
+
+  p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: $text-dark;
+    padding: 8px 12px;
+    background: linear-gradient(135deg,
+        rgba($baby-blue-light, 0.1),
+        rgba($white, 0.95));
+    border-radius: 10px;
+    border-left: 4px solid $baby-blue;
+    box-shadow: 0 2px 8px rgba($baby-blue, 0.15);
+    transition: all 0.3s ease;
+
+    strong {
+      color: $baby-blue-dark;
+      font-weight: 600;
+    }
+
+    &:hover {
+      transform: translateX(4px);
+      background: linear-gradient(135deg,
+          rgba($baby-blue-light, 0.2),
+          rgba($white, 0.95));
+      box-shadow: 0 4px 12px rgba($baby-blue, 0.25);
+    }
+  }
+
+  // Top Species List
+  ol {
+    margin: 0;
+    padding-left: 24px;
+
+    li {
+      margin: 10px 0;
+      font-size: 14px;
+      color: $text-dark;
+      padding: 10px 14px;
+      background: linear-gradient(135deg,
+          rgba($baby-blue-light, 0.12),
+          rgba($white, 0.95));
+      border-radius: 10px;
+      border-left: 4px solid $marigold;
+      box-shadow: 0 2px 8px rgba($marigold, 0.15);
+      transition: all 0.3s ease;
+      list-style-position: inside;
+
+      &:hover {
+        transform: translateX(6px);
+        background: linear-gradient(135deg,
+            rgba($marigold-light, 0.2),
+            rgba($white, 0.95));
+        box-shadow: 0 4px 12px rgba($marigold, 0.3);
+        border-left-color: $baby-blue;
+      }
+
+      &::marker {
+        color: $marigold-dark;
+        font-weight: 700;
+      }
+    }
+  }
+
+  // Latest Observation Thumbnail
+  ion-thumbnail {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 3px solid $white;
+    box-shadow: 0 4px 16px rgba($baby-blue, 0.3);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba($baby-blue, 0.5);
+    }
+
+    img {
+      object-fit: cover;
+    }
+  }
+}
+
+// ========================================
+// CHART CARDS - SPECIAL STYLING
+// ========================================
+ion-card:has(canvas) {
+  border: 3px solid transparent;
+  background-image: linear-gradient($white, $white),
+    linear-gradient(135deg,
+      $baby-blue 0%,
+      $baby-blue-light 30%,
+      $white 50%,
+      $marigold-light 80%,
+      $marigold 100%);
+
+  ion-card-header {
+    background: linear-gradient(135deg,
+        rgba($baby-blue, 0.2),
+        rgba($baby-blue-light, 0.15),
+        rgba($marigold-light, 0.1));
+
+    ion-card-title {
+      font-size: 18px;
+      color: $baby-blue-dark;
+    }
+  }
+
+  ion-card-content {
+    padding: 20px;
+    background: linear-gradient(180deg,
+        rgba($baby-blue-light, 0.05),
+        rgba($white, 0.98));
+  }
+
+  canvas {
+    border-radius: 12px;
+    box-shadow: inset 0 2px 8px rgba($baby-blue, 0.1);
+  }
+}
+
+// ========================================
+// NOTE SECTION
+// ========================================
+ion-note {
+  color: $text-gray;
+  font-size: 13px;
+  font-style: italic;
+  padding: 12px 16px;
+  background: linear-gradient(135deg,
+      rgba($baby-blue-light, 0.1),
+      rgba($marigold-light, 0.1));
+  border-radius: 12px;
+  border-left: 4px solid $baby-blue;
+  box-shadow: 0 2px 8px rgba($baby-blue, 0.15);
+  animation: fadeIn 1s ease-out;
+}
+
+// ========================================
+// ANIMATIONS
+// ========================================
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes gradientShift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes titlePulse {
+
+  0%,
+  100% {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  }
+
+  50% {
+    text-shadow: 0 4px 20px rgba($baby-blue, 0.7);
+  }
+}
+
+@keyframes numberCount {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// ========================================
+// RESPONSIVE ADJUSTMENTS
+// ========================================
+@media (min-width: 768px) {
+  ion-card-content {
+    h2 {
+      font-size: 42px;
+    }
+
+    p {
+      font-size: 15px;
+    }
+
+    ol li {
+      font-size: 15px;
+      padding: 12px 16px;
+    }
+  }
+
+  ion-card-header ion-card-title {
+    font-size: 17px;
+  }
+
+  ion-button {
+    height: 44px;
+  }
+}
+
+// ========================================
+// GRID ADJUSTMENTS
+// ========================================
+ion-grid {
+  padding: 0;
+}
+
+ion-col {
+  padding: 6px;
+}
+
+// ========================================
+// LOADING STATE (OPTIONAL)
+// ========================================
+.loading-skeleton {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// ========================================
+// SPECIAL CARD INDICATORS
+// ========================================
+
+// Total Observations Card
+ion-col:nth-child(1) ion-card {
+  &::after {
+    //content: '📊';
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 32px;
+    opacity: 0.15;
+    z-index: 0;
+  }
+}
+
+// Total Birds Card
+ion-col:nth-child(2) ion-card {
+  &::after {
+    //content: '🦅';
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 32px;
+    opacity: 0.15;
+    z-index: 0;
+  }
+}
+
+// Unique Species Card
+ion-col:nth-child(3) ion-card {
+  &::after {
+    //content: '🌿';
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 32px;
+    opacity: 0.15;
+    z-index: 0;
+  }
+}
+
+// Diversity Index Card
+ion-col:nth-child(4) ion-card {
+  &::after {
+    //content: '📈';
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 32px;
+    opacity: 0.15;
+    z-index: 0;
+  }
+}
+
+// ========================================
+// SCROLL ANIMATIONS (OPTIONAL)
+// ========================================
+ion-card {
+  animation: cardSlideIn 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+ion-content {
+  scroll-behavior: smooth;
+}

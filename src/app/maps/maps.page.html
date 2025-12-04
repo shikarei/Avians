@@ -1,15 +1,207 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>maps</ion-title>
+    <ion-title>Map</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleSidebar()" style="--color: #1a7ec0;">
+        <ion-icon name="options-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div id="map" style="height: 100%;"></div>
 
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button routerLink="/createpoint">
+<ion-content [fullscreen]="true" style="position: relative; --background: transparent;">
+
+  <!-- MAP -->
+  <div id="map"></div>
+
+
+  <!-- ======================================================= -->
+  <!-- SIDEBAR OVERLAY -->
+  <!-- ======================================================= -->
+  <div class="sidebar-overlay" [class.show]="isSidebarOpen" (click)="toggleSidebar()">
+  </div>
+
+
+  <!-- ======================================================= -->
+  <!-- SIDEBAR WRAPPER -->
+  <!-- ======================================================= -->
+  <div class="custom-sidebar" [class.open]="isSidebarOpen">
+
+    <!-- Sidebar Header -->
+    <div class="sidebar-header">
+      <h3>Filter Options</h3>
+
+      <ion-button fill="clear" (click)="toggleSidebar()" style="--color: white;">
+        <ion-icon name="close-circle" slot="icon-only" style="font-size: 28px;"></ion-icon>
+      </ion-button>
+    </div>
+
+
+    <!-- Sidebar Body -->
+    <div class="sidebar-content">
+
+      <!-- ================================================== -->
+      <!-- SELECT SPECIES -->
+      <!-- ================================================== -->
+      <div class="filter-group">
+        <h4 class="filter-label">
+          <ion-icon name="paw-outline"></ion-icon>
+          Select Species
+        </h4>
+
+        <ion-item lines="none" class="custom-select-item">
+          <ion-select [(ngModel)]="selectedSpecies" interface="action-sheet" placeholder="Select Species"
+            style="width: 100%;">
+
+            <ion-select-option value="all">All Species</ion-select-option>
+
+            <ion-select-option *ngFor="let s of speciesList" [value]="s">
+              {{ s }}
+            </ion-select-option>
+
+          </ion-select>
+        </ion-item>
+      </div>
+
+
+      <!-- ================================================== -->
+      <!-- DATE RANGE GROUP -->
+      <!-- ================================================== -->
+      <div class="filter-group">
+        <h4 class="filter-label">
+          <ion-icon name="calendar-number-outline"></ion-icon>
+          Date Range
+        </h4>
+
+        <ion-button id="open-start-date" expand="block" fill="outline" class="date-btn ion-margin-bottom">
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
+          Start: {{ startDate ? (startDate | date:'dd MMM yy') : '-' }}
+        </ion-button>
+
+
+        <ion-button id="open-end-date" expand="block" fill="outline" class="date-btn">
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
+          End: {{ endDate ? (endDate | date:'dd MMM yy') : '-' }}
+        </ion-button>
+
+
+        <!-- ================================================= -->
+        <!-- ACTION BUTTONS (SUDAH DI DALAM CARD) -->
+        <!-- ================================================= -->
+
+        <div class="menu-actions">
+
+          <ion-button expand="block" class="apply-btn" (click)="applyDateFilterAndClose()"
+            [disabled]="!startDate || !endDate">
+            <ion-icon name="funnel" slot="start"></ion-icon>
+            Apply Filter
+          </ion-button>
+
+          <ion-button expand="block" fill="clear" class="reset-btn" (click)="resetDateFilter()">
+            <ion-icon name="refresh" slot="start"></ion-icon>
+            Reset All
+          </ion-button>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ======================================================= -->
+  <!-- FAB BUTTONS -->
+  <!-- ======================================================= -->
+
+  <!-- Basemap -->
+  <ion-fab slot="fixed" vertical="center" horizontal="start" style="margin-left: 10px;">
+    <ion-fab-button class="glass-fab basemap-btn" size="small">
+      <ion-icon name="layers-outline"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="end">
+      <ion-fab-button size="small" class="glass-mini" (click)="setBasemap('osm')">
+        <ion-icon name="map-outline"></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-button size="small" class="glass-mini" (click)="setBasemap('esri')">
+        <ion-icon name="globe-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+
+  <!-- Add Point -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="start" style="margin-left: 18px; margin-bottom: 90px;">
+    <ion-fab-button class="glass-fab add-btn" routerLink="/createpoint">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+
+  <!-- Locate Me -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="start" style="margin-left: 10px; margin-bottom: 20px;">
+    <ion-fab-button class="glass-fab locate-btn" size="small" (click)="locateMe()">
+      <ion-icon name="locate"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <!-- ======================================================= -->
+  <!-- DATE PICKER MODALS -->
+  <!-- ======================================================= -->
+  <ion-modal trigger="open-start-date" [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime presentation="date" [(ngModel)]="startDate" [max]="todayDate" (ionChange)="dismissStartModal()">
+      </ion-datetime>
+    </ng-template>
+  </ion-modal>
+
+
+  <ion-modal trigger="open-end-date" [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime presentation="date" [(ngModel)]="endDate" [max]="todayDate" (ionChange)="dismissEndModal()">
+      </ion-datetime>
+    </ng-template>
+  </ion-modal>
+
 </ion-content>
+
+
+<!-- ======================================================= -->
+<!-- TIMELINE FOOTER -->
+<!-- ======================================================= -->
+<ion-footer *ngIf="startDate && endDate">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+
+        <ion-col size="2">
+          <ion-button fill="clear" (click)="togglePlay()">
+            <ion-icon [name]="isPlaying ? 'pause' : 'play'" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+        <ion-col size="10">
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: gray;">
+            <span>{{ startDate | date:'dd MMM' }}</span>
+            <span style="font-weight: bold; color: var(--ion-color-primary);">
+              {{ currentPlayDate | date:'dd MMM yyyy' }}
+            </span>
+            <span>{{ endDate | date:'dd MMM' }}</span>
+          </div>
+
+          <ion-range min="0" [max]="100" [value]="playProgress" [disabled]="true"
+            style="padding-top: 0; padding-bottom: 5px;">
+          </ion-range>
+
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

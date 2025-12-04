@@ -8,22 +8,23 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('./splashscreen/splashscreen.module').then( m => m.SplashscreenPageModule)
-  },  {
+    loadChildren: () => import('./splashscreen/splashscreen.module').then(m => m.SplashscreenPageModule)
+  },
+  {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
   },
   {
     path: 'maps',
-    loadChildren: () => import('./maps/maps.module').then( m => m.MapsPageModule)
+    loadChildren: () => import('./maps/maps.module').then(m => m.MapsPageModule)
   },
   {
     path: 'createpoint',
-    loadChildren: () => import('./createpoint/createpoint.module').then( m => m.CreatepointPageModule)
+    loadChildren: () => import('./createpoint/createpoint.module').then(m => m.CreatepointPageModule)
   }
 
 
@@ -34,4 +35,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
